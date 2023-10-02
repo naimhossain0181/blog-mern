@@ -23,19 +23,24 @@ const Slide = ({ Posts }: RootState) => {
     const [Populer,setPopuler]=useState<Data[]>([])
 
       useEffect(()=>{
-                const findTopMostViewedPosts = (N:number) => {
-                    if (Posts?.data?.length === 0) {
-                      return []; // Return an empty array if there are no posts
-                    }
-                    // Sort the posts based on views in descending order
-                    const sortedPosts = [...Posts.data].sort((a, b) => b.views - a.views);
-                
-                    // Take the top N Nummber of posts
-                    const top5Posts = sortedPosts.slice(0,N);
-                
-                    setPopuler(top5Posts) ;
-                  };
-                  findTopMostViewedPosts(4)    
+        try{
+            const findTopMostViewedPosts = (N:number) => {
+                if (Posts?.data?.length === 0) {
+                  return []; // Return an empty array if there are no posts
+                }
+                // Sort the posts based on views in descending order
+                const sortedPosts = [...Posts.data].sort((a, b) => b.views - a.views);
+            
+                // Take the top N Nummber of posts
+                const top5Posts = sortedPosts.slice(0,N);
+            
+                setPopuler(top5Posts) ;
+              };
+              findTopMostViewedPosts(4)    
+        }catch(err){
+            console.log(err)
+        }
+               
       },[Posts])
     return (
         <section className=" shadow-lg mt-24 mb-24">
