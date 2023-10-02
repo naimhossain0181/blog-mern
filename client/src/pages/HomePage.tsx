@@ -16,6 +16,14 @@ const HomePage = () => {
         dispatch(getAllPost())
 
     },[])
+    if(Posts.isLoading){
+        return(
+            <div>
+                <h1>Data Loading....</h1>
+            </div>
+        )
+    }
+    
     return (
         <div>
             <Slide Posts={Posts}/>
