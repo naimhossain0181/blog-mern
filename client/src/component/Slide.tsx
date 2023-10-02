@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { RootState } from "../reducer";
 // icon
@@ -12,6 +12,7 @@ import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 import 'swiper/css/free-mode';
 import 'swiper/css/thumbs';
+import { Data } from '../reducer/postSlice';
 
 
 
@@ -19,22 +20,24 @@ import 'swiper/css/thumbs';
 const Slide = ({ Posts }: RootState) => {
 
     const [thumb, setThumb] = useState<SwiperClass | null>(null)
+    const [Populer,setPopuler]=useState<Data[]>([])
 
-    const findTopMostViewedPosts = (N:number) => {
-        if (Posts.data.length === 0) {
-          return []; // Return an empty array if there are no posts
-        }
-    
-        // Sort the posts based on views in descending order
-        const sortedPosts = [...Posts.data].sort((a, b) => b.views - a.views);
-    
-        // Take the top N Nummber of posts
-        const top5Posts = sortedPosts.slice(0, N);
-    
-        return top5Posts;
-      };
-    
-      const top4PopulerPost = findTopMostViewedPosts(4);
+    console.log(Posts.data.length)
+      useEffect(()=>{
+                const findTopMostViewedPosts = (N:number) => {
+                    if (Posts.data.length === 0) {
+                      return []; // Return an empty array if there are no posts
+                    }
+                    // Sort the posts based on views in descending order
+                    const sortedPosts = [...Posts.data].sort((a, b) => b.views - a.views);
+                
+                    // Take the top N Nummber of posts
+                    const top5Posts = sortedPosts.slice(0,N);
+                
+                    setPopuler(top5Posts) ;
+                  };
+                  findTopMostViewedPosts(4)    
+      },[Posts])
     return (
         <section className=" shadow-lg mt-24 mb-24">
             <Swiper
@@ -63,7 +66,7 @@ const Slide = ({ Posts }: RootState) => {
                 thumbs={thumb ? { swiper: thumb } : undefined}
             >
                 {
-                    top4PopulerPost?.map((post, index) => {
+                    Populer?.map((post, index) => {
                         const postDate = new Date(post.createdAt)
                         const day = postDate.getDate()
                         const month = postDate.toLocaleString('default', { month: "short" })
@@ -142,7 +145,7 @@ const Slide = ({ Posts }: RootState) => {
 
             >
                 {
-                    top4PopulerPost?.map((post, index) => {
+                    Populer?.map((post, index) => {
                         const postDate = new Date(post.createdAt)
                         const day = postDate.getDate()
                         const month = postDate.toLocaleString('default', { month: "short" })
