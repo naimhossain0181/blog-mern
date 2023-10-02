@@ -12,7 +12,7 @@
   <component name="ChangeListManager">
     <list default="true" id="f5f12ada-061d-42e6-a686-b1056bd0d2d3" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vercel.json" beforeDir="false" afterPath="$PROJECT_DIR$/vercel.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/reducer/postSlice.ts" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/reducer/postSlice.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -73,7 +73,7 @@
       <workItem from="1696240404465" duration="2177000" />
       <workItem from="1696244158428" duration="53000" />
       <workItem from="1696244494011" duration="1161000" />
-      <workItem from="1696245695366" duration="1632000" />
+      <workItem from="1696245695366" duration="2298000" />
     </task>
     <servers />
   </component>

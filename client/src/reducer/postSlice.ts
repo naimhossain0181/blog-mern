@@ -1,7 +1,7 @@
 import { createSlice,createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 
-const baseUrl="http://localhost:9000/"
+const baseUrl="https://blog-mern-365-8h1do39uz-naimhossain0181.vercel.app/"
 
 export const getAllPost= createAsyncThunk("/allpost", async ()=>{
         try{
