@@ -17,7 +17,7 @@ import 'swiper/css/thumbs';
 
 
 const Slide = ({ Posts }: RootState) => {
-    console.log(Posts)
+
     const [thumb, setThumb] = useState<SwiperClass | null>(null)
 
     const findTopMostViewedPosts = (N:number) => {
