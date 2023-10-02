@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "../reducer";
 import RecentArticle from "../component/RecentArticle";
 import PostComp from "../component/PostComp";
+import loader from '../assets/Vg1.gif'
 
 const HomePage = () => {
 
@@ -18,8 +19,8 @@ const HomePage = () => {
     },[])
     if(Posts.isLoading){
         return(
-            <div>
-                <h1>Data Loading....</h1>
+            <div className="w-full h-[80vh] flex justify-center items-center flex-col">
+                <img  src={loader} alt="abc" />
             </div>
         )
     }
