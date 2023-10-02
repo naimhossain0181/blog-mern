@@ -22,10 +22,9 @@ const Slide = ({ Posts }: RootState) => {
     const [thumb, setThumb] = useState<SwiperClass | null>(null)
     const [Populer,setPopuler]=useState<Data[]>([])
 
-    console.log(Posts.data.length)
       useEffect(()=>{
                 const findTopMostViewedPosts = (N:number) => {
-                    if (Posts.data.length === 0) {
+                    if (Posts?.data?.length === 0) {
                       return []; // Return an empty array if there are no posts
                     }
                     // Sort the posts based on views in descending order

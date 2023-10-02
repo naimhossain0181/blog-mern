@@ -6,7 +6,7 @@ const RecentArticle = ({ Posts }: RootState) => {
 
     
     const findMostRecentPosts = (N:number) => {
-        if (Posts.data.length === 0) {
+        if (Posts?.data?.length === 0) {
           return []; // Return an empty array if there are no posts
         }
     
