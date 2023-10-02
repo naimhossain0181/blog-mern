@@ -26,7 +26,7 @@ app.use("/posts",postRouter)
 app.use("/comments",commentRouter)
 app.use("/categories",categoriesRouter)
 //server render
-let port =process.env.PORT || 9000
+let port =process.env.PORT || 3000
 app.listen(port,(()=>{
     console.log(`server connected port number ${port}`)
 }))
