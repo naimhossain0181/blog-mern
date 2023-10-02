@@ -1,30 +1,29 @@
 import { RootState } from '../reducer';
+import { useEffect, useState } from 'react';
+import { Data } from '../reducer/postSlice';
 
 const RecentArticle = ({ Posts }: RootState) => {
 
 
 
     
-    const findMostRecentPosts = (N:number) => {
-        if (Posts?.data?.length === 0) {
-          return []; // Return an empty array if there are no posts
-        }
-    
-        // Sort the posts based on views in descending order
-        const sortedPosts = [...Posts.data].sort((a, b)=>{
-            const dateA=new Date(a.createdAt).getTime()
-            const dateB=new Date(b.createdAt).getTime()
-            return dateB-dateA
+    const [Recent,setRecent]=useState<Data[]>([])
 
-        } )
-    
-        // Take the top N number of posts
-        const top5Posts = sortedPosts.slice(0, N);
-    
-        return top5Posts;
-      };
-    
-      const MostRecentPosts = findMostRecentPosts(4);
+    useEffect(()=>{
+              const findTopMostViewedPosts = (N:number) => {
+                  if (Posts?.data?.length === 0) {
+                    return []; // Return an empty array if there are no posts
+                  }
+                  // Sort the posts based on views in descending order
+                  const sortedPosts = [...Posts.data].sort((a, b) => b.views - a.views);
+              
+                  // Take the top N Nummber of posts
+                  const top5Posts = sortedPosts.slice(0,N);
+              
+                  setRecent(top5Posts) ;
+                };
+                findTopMostViewedPosts(4)    
+    },[Posts])
     return (
         <section>
             <div className='w-full pl-5 pr-5 lg:pl-24 lg:pr-24'>
@@ -35,7 +34,7 @@ const RecentArticle = ({ Posts }: RootState) => {
                     <div className=' w-full grid justify-center items-center  gap-5 grid-cols-1 sm:grid-cols-2  md:grid-cols-2 lg:grid-cols-2 '>
 
                     {
-                        MostRecentPosts.map((post,index)=>{
+                        Recent?.map((post,index)=>{
                             const postDate = new Date(post.createdAt)
                             const day = postDate.getDate()
                             const month = postDate.toLocaleString('default', { month: "short" })
