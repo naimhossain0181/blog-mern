@@ -117,7 +117,7 @@ const Slide = ({ Posts }: RootState) => {
                 }
 
                 <button className="prev-arrow-button absolute z-10 left-0 top-[45%]"><BsArrowLeftCircleFill fontSize={36} /></button>
-                <button onClick={(e) => console.log(e.currentTarget)} className="next-arrow-button absolute z-10 right-0 top-[45%] "><BsArrowRightCircleFill fontSize={36} /></button>
+                <button  className="next-arrow-button absolute z-10 right-0 top-[45%] "><BsArrowRightCircleFill fontSize={36} /></button>
             </Swiper>
 
 
@@ -133,6 +133,10 @@ const Slide = ({ Posts }: RootState) => {
                 slidesPerView={3}
                 loop={true}
                 watchSlidesProgress={true}
+                autoplay={{
+                    delay: 3000,
+                    disableOnInteraction: false,
+                }}
 
                 breakpoints={{
                     340: {
