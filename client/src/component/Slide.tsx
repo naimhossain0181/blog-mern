@@ -126,7 +126,9 @@ const Slide = ({ Posts }: RootState) => {
             <Swiper
                 className=" mt-2 w-full h-[120px] flex justify-start  "
                 modules={[Controller, Navigation, Autoplay, Pagination, Thumbs, FreeMode]}
-                onSwiper={setThumb}
+                onSwiper={(swiper)=>{
+                    setThumb(swiper)
+                }}
                 spaceBetween={0}
                 slidesPerView={3}
                 loop={true}
