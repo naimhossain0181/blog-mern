@@ -38,47 +38,48 @@ export const GetPost=async (req,res)=>{
                 from:'users',   //origin of author
                 localField:"author", //which field we want to populate
                 foreignField:"_id", //Type of filed
-                as:"authorInfo"
+                as:"author"
             }
         },
         {
             $lookup:{
-                from:'categories',   //origin of author
+                from:'categories',   //origin of category
                 localField:"category", //which field we want to populate
                 foreignField:"_id", //Type of filed
-                as:"categoryInfo"
+                as:"category"
             }
         },
+
         {
-            $unwind:"$authorInfo",
+            $unwind:"$author",
 
         },
         {
-            $unwind:"$categoryInfo",
+            $unwind:"$category",
 
+        },
+        {
+            $lookup:{
+                from:'posts',   //origin of author
+                localField:"author.posts", //which field we want to populate
+                foreignField:"_id", //Type of filed
+                as:"author.posts"
+            }
         },
         {
             $match:{
-                "authorInfo.block":false
+                "author.block":false
             }
         },
+        // Exclude the  field from 'author'
         {
             $project: {
-                _id: 1,
-                title: 1,
-                desc: 1,
-                image:1,
-                author:1,
-                views:1,
-                likes:1,
-                comments:1,
-                createdAt:1,
-                category:"$categoryInfo.name",
-                block: '$authorInfo.block',
-                authorName:'$authorInfo.name',
-                authorImage:'$authorInfo.image',
+                'author.password': 0 ,
+                'author.email': 0 ,
+                'author.role': 0 ,
             }
         }
+       
     ]
     try{
         const posts = await PostSchema.aggregate(Pipeline)
@@ -100,9 +101,23 @@ export const GetPost=async (req,res)=>{
 //Get Post By ID
 export const GetPostById=async (req,res)=>{
     const {id}=req.params
+
+    const post = await  PostSchema
+  .findById(id)
+  .populate({
+    path: 'author',
+    model: UserSchema, // Replace with the actual model name if it's different
+    select:'-password -email -role ',
+    populate: {
+      path: 'posts',
+      model: PostSchema, // Replace with the actual model name if it's different
+    },
+  }).populate({path:'category'})
+  .exec();
+
     try{
-        const post = await PostSchema.findById(id)
-        if (post){
+        // const post = await PostSchema.findById(id).populate('author','-email -password -role').exec().populate('category')
+        if (post.author.block !==true){
             await PostSchema.findByIdAndUpdate(post._id,{views:post.views+1})
             return res.status(200).json({status:"Success",result:post})
         }

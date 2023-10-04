@@ -9,6 +9,7 @@ import Login from "./pages/Login";
 import Signup from "./pages/Signup";
 import { useEffect } from "react";
 import Footer from "./component/Footer";
+import PostDetails from "./pages/PostDetails";
 
 const App = () => {
 
@@ -25,6 +26,8 @@ useEffect(()=>{
 
         <Routes >
           <Route  path="/*" element={<HomePage/>} />
+          <Route  path="*" element={<HomePage/>} />
+          <Route  path="/posts/:id" element={<PostDetails/>} />
           <Route path="/about/*" element={<About/>} />
           <Route path="/blog/*" element={<Blog/>} />
           <Route path="/contact/*" element={<Contact/>} />

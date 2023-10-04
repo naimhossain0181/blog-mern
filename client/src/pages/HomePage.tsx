@@ -6,6 +6,7 @@ import { AppDispatch, RootState } from "../reducer";
 import RecentArticle from "../component/RecentArticle";
 import PostComp from "../component/PostComp";
 import loader from '../assets/Vg1.gif'
+import { useParams } from "react-router-dom";
 
 const HomePage = () => {
 
@@ -13,10 +14,11 @@ const HomePage = () => {
     // data fetch from Api using RTK
     const Posts = useSelector((store: RootState) => store.Posts)
 
+    const params=useParams()
+
     useEffect(()=>{
         dispatch(getAllPost())
-
-    },[])
+    },[params])
     if(Posts.isLoading){
         return(
             <div className="w-full h-[80vh] flex justify-center items-center flex-col">

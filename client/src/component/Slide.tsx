@@ -40,8 +40,10 @@ const Slide = ({ Posts }: RootState) => {
         }catch(err){
             console.log(err)
         }
+        Swiper
+        console.log(Swiper)
                
-      },[Posts])
+      },[Swiper,Posts])
     return (
         <section className=" shadow-lg mt-24 mb-24">
             <Swiper
@@ -80,28 +82,28 @@ const Slide = ({ Posts }: RootState) => {
                         if (index < 4)
                             return (
                                 <SwiperSlide  className=" h-full w-[100%]  flex  flex-col-reverse  justify-between items-center  md:h-[500px] md:flex-row md:pr-12  " key={index}>
-                                    <div className="w-full md:w-[50%] h-full gap-2 md:ml-10 flex flex-col md:gap-10">
+                                    <Link to={`/posts/${post._id}`} className="w-full md:w-[50%] h-full gap-2 md:ml-10 flex flex-col md:gap-10">
                                         <div className="category w-[250px] h-24 flex justify-start items-center ">
                                             <div className="flex justify-between items-center w-full h-full">
-                                                <button className="w-[100px] h-[36px] rounded-lg bg-purple-500">{post.category}</button>
+                                                <button className="w-[100px] h-[36px] rounded-lg bg-purple-500">{post.category.name}</button>
                                                 <p>{`${day} - ${month} -${year}`}</p>
                                             </div>
                                         </div>
                                         <div className="w-[100%] gap-2  flex flex-col md:gap-10" >
-                                            <Link to={"/details"}> <h1 className=" text-3xl md:text-5xl">{post.title}</h1></Link>
-                                            <p className="text-gray-600 "> {post.desc.slice(0, 200)}  <Link to={"/details"} className=" text-blue-400">..Raed more...</Link></p>
+                                            <h1 className=" text-3xl md:text-5xl">{post.title}</h1>
+                                            <p className="text-gray-600 "> {post.desc.slice(0, 200)}  <span  className=" text-blue-400">..Raed more...</span></p>
                                         </div>
                                         <div className=" flex justify-between w-full items-center pr-4">
                                             <div className=" flex items-center w-[200px]" >
-                                                <img className=" outline-offset-8 outline-red-700 outline-8 w-[40px] h-[40px] block object-fill rounded-full" src={post.authorImage} alt="" />
-                                                <Link to={"/details"}> <h1 className=" pl-2 text-lg  ">{post.authorName}</h1></Link>
+                                                <img className=" w-[40px] h-[40px]  object-fill rounded-full" src={post.author.image} alt="" />
+                                               <h1 className=" pl-2 text-lg  ">{post.author.name}</h1>
                                             </div>
                                             <div>
                                                 <p>Views <span>{post.views}</span></p>
                                             </div>
                                         </div>
 
-                                    </div>
+                                    </Link>
 
 
                                     <div className=" flex items-center justify-center w-full h-[220px] rounded-2xl md:w-[40%] md:h-[480px] shadow-lg">
