@@ -1,5 +1,5 @@
-import axios, { AxiosProgressEvent } from "axios";
-import { ChangeEvent, ChangeEventHandler, useEffect, useState, useRef } from "react";
+import axios from "axios";
+import { useEffect, useState, useRef } from "react";
 import { base_URL } from "../../utilitis/baseUrl";
 import { toast, ToastContainer } from 'react-toastify';
 import PostCreateForm from "../../component/Dashboard/PostCreateForm";
@@ -16,7 +16,7 @@ const Create = () => {
 
 
     const [categories, setCategories] = useState<category[]>([])
-    const [loading, setLoading] = useState(false)
+    // const [loading, setLoading] = useState(false)
     const [percentage, setPercentage] = useState<number>(0)
     const [prevImage, setPrevImage] = useState<any>(null)
 

@@ -3,11 +3,10 @@ import { AppDispatch, RootState } from "../../reducer";
 import { getPostByUserId } from "../../reducer/postSlice";
 import jwtDecode from "jwt-decode";
 import { decodeJwt } from "../Login";
-import { Link, useNavigate } from "react-router-dom";
+import {  useNavigate } from "react-router-dom";
 import { useEffect } from 'react';
 import axios from "axios";
 import { base_URL } from "../../utilitis/baseUrl";
-import { toast } from "react-toastify";
 import Swal from "sweetalert2";
 const Delete = () => {
     const Dispatch = useDispatch<AppDispatch>()

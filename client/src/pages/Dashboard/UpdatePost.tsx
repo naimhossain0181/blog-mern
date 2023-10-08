@@ -3,7 +3,7 @@ import { useEffect, useState, useRef } from "react";
 import { base_URL } from "../../utilitis/baseUrl";
 import { toast, ToastContainer } from 'react-toastify';
 import { FaCloudUploadAlt } from 'react-icons/fa'
-import { useLocation, useParams, useSearchParams } from "react-router-dom";
+import { useLocation, useParams } from "react-router-dom";
 
 export type category = {
     _id: string
@@ -29,7 +29,7 @@ const UpdatePost = () => {
 
     const [inputValue,setInputValue]=useState<initialDataType >(InitialVaule)
     const [categories, setCategories] = useState<category[]>([])
-    const [loading, setLoading] = useState(false)
+    // const [loading, setLoading] = useState(false)
     const [percentage, setPercentage] = useState<number>(0)
     const [prevImage, setPrevImage] = useState<any>(searchParams.get('image'))
 
