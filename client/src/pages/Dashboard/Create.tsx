@@ -70,6 +70,7 @@ const Create = () => {
                 console.log(e.response)
             })
     }
+    console.log(percentage)
     useEffect(() => {
         axios.get(`${base_URL}/categories/all`)
             .then((response) => console.log(setCategories(response.data.result)))

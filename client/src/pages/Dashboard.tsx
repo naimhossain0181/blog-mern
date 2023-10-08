@@ -1,7 +1,7 @@
 import jwtDecode from 'jwt-decode';
 import { useEffect, useState } from 'react';
 import { decodeJwt } from './Login';
-import { Link, Route, Routes, useNavigate, useParams, useSearchParams } from 'react-router-dom';
+import { Link, Route, Routes, useNavigate } from 'react-router-dom';
 import { getUserById } from '../reducer/userSlice';
 import { useDispatch, useSelector } from 'react-redux';
 import { AppDispatch, RootState } from '../reducer';
