@@ -1,37 +1,39 @@
 import { useEffect } from "react";
 import Slide from "../component/Slide";
-import { getAllPost } from "../reducer/postSlice";
+import {  getAllPost } from "../reducer/postSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "../reducer";
 import RecentArticle from "../component/RecentArticle";
 import PostComp from "../component/PostComp";
-import loader from '../assets/Vg1.gif'
-import { useParams } from "react-router-dom";
+import Loading from "../component/Loading";
+import { useLocation } from "react-router-dom";
 
 const HomePage = () => {
-
-    const dispatch = useDispatch<AppDispatch>()
-    // data fetch from Api using RTK
-    const Posts = useSelector((store: RootState) => store.Posts)
-
-    const params=useParams()
-
-    useEffect(()=>{
-        dispatch(getAllPost())
-    },[params])
-    if(Posts.isLoading){
-        return(
-            <div className="w-full h-[80vh] flex justify-center items-center flex-col">
-                <img  src={loader} alt="abc" />
-            </div>
-        )
-    }
     
+    // data fetch from Api using RTK
+    const dispatch = useDispatch<AppDispatch>();
+    const Posts=useSelector((store:RootState)=>store.Posts)
+    const location=useLocation()
+
+    useEffect(() => {
+        dispatch(getAllPost());
+    }, []);
+
+    useEffect(() => {
+        window.scrollTo({ top: 0, behavior: 'smooth' })
+      }, [location.pathname]);
+
+
+    if (Posts.isLoading) {
+        return (
+            <Loading/>
+        );
+    }
     return (
-        <div>
+        <div >
             <Slide Posts={Posts}/>
-            <RecentArticle Posts={Posts}/>
-            <PostComp Posts={Posts}/>
+            <RecentArticle Posts={Posts} />
+            <PostComp Posts={Posts} />
         </div>
     );
 };

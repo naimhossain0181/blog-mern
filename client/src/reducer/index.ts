@@ -1,5 +1,6 @@
 import { configureStore, getDefaultMiddleware } from "@reduxjs/toolkit";
-import postSlice from "./postSlice";
+import postSlice, { PostStateType } from "./postSlice";
+import userSlice, { UserStateType } from "./userSlice";
 
 const customizedMiddleware = getDefaultMiddleware({
     serializableCheck: false
@@ -7,10 +8,17 @@ const customizedMiddleware = getDefaultMiddleware({
 
 const store=configureStore({
     reducer:{
-        Posts:postSlice
+        Posts:postSlice,
+        User:userSlice
     },
     middleware:customizedMiddleware
 })
-export type RootState=ReturnType<typeof store.getState>
+
+
+
+export type RootState= {
+    Posts:PostStateType
+    User?:UserStateType
+}
 export type AppDispatch=typeof store.dispatch
 export default store

@@ -21,7 +21,7 @@ const PostComp = ({Posts}:RootState) => {
                         return(
                             <Link to={`/posts/${post._id}`} key={index} className='h-[500px] w-[100%] shadow-lg hover:scale-[1.02] transition  ease-in'>
                             <div className=' relative'>
-                                <button className=' absolute   left-5 top-5 h-12 w-24 rounded-lg bg-green-400'>{post.category.name}</button>
+                                <button className=' absolute   left-5 top-5 h-12 w-24 rounded-lg bg-green-400'>{typeof post.category==="string"?post.category: post.category.name}</button>
                                 <div className='w-full h-[300px] '>
                                     <img className=' rounded-t-xl w-full h-full object-cover' src={post.image} alt="image" />
                                 </div>
@@ -31,8 +31,8 @@ const PostComp = ({Posts}:RootState) => {
                                 <h1 className=' font-serif font-extrabold text-lg lg:text-2xl text-gray-900 '>{post.title}</h1>
                                 <div className=' flex justify-between items-center'>
                                     <div className=' flex flex-row justify-center items-center gap-2'>
-                                        <img className=' w-8 h-8 rounded-full object-cover' src={post.author.image} alt="" />
-                                        <span className=' font-bebas font-bold'>{post.author.name}</span>
+                                        <img className=' w-8 h-8 rounded-full object-cover' src={typeof post.author==="string" ? post.author : post.author.image} alt="" />
+                                        <span className=' font-bebas font-bold'>{typeof post.author==="string"?post.author : post.author.name}</span>
                                     </div>
                                     <span className=' font-bebas text-gray-700'>views {post.views} </span>
                                 </div>

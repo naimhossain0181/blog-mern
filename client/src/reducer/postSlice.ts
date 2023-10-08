@@ -1,11 +1,11 @@
-import { createSlice,createAsyncThunk } from "@reduxjs/toolkit";
+import { createSlice,createAsyncThunk, PayloadAction } from "@reduxjs/toolkit";
 import axios from "axios";
+import { base_URL } from "../utilitis/baseUrl";
 
-const baseUrl="http://localhost:9000"
 
 export const getAllPost= createAsyncThunk("/allpost", async ()=>{
         try{
-           const result =await axios.get(baseUrl+"/posts")
+           const result =await axios.get(base_URL+"/posts")
            return result.data.result
         }
         catch(err){
@@ -13,10 +13,23 @@ export const getAllPost= createAsyncThunk("/allpost", async ()=>{
         }
 })
 
-export const getSinglePost=createAsyncThunk("/posts/:id", async(id:string)=>{
+export const getSinglePost=createAsyncThunk("/posts/:id", async(id:string |undefined)=>{
     try{
-        const result =await axios.get(`${baseUrl}/posts/${id}`)
-        console.log(result)
+        const result =await axios.get(`${base_URL}/posts/${id}`)
+        return result.data.result
+     }
+     catch(err){
+         return err
+     }
+})
+
+export const getPostByUserId=createAsyncThunk("/posts/my:userId", async({authId,token}:{authId:string,token:string})=>{
+    try{
+        const result =await axios.get(`${base_URL}/posts/my/${authId}` ,{
+            headers:{
+                token:token
+            }
+        })
         return result.data.result
      }
      catch(err){
@@ -27,34 +40,35 @@ export const getSinglePost=createAsyncThunk("/posts/:id", async(id:string)=>{
 
 
 export type Data={
-    "_id": string,
-    "title": string,
-    "desc": string,
-    "image": string,
-    "author": {
-        "_id":string,
-        "name":string,
+    "_id": string
+    "title": string
+    "desc": string
+    "image": string
+    "author":{
+        "_id":string
+        "name":string
         "image":string
-    },
-    "views": number,
-    "likes": any[],
-    "comments": any[],
+    } | string
+    "views": number
+    "likes": any[]
+    "comments": any[]
     "category": {
         "_id":string
-        "name":string,
+        "name":string
         "icon":string
-    },
-    "createdAt":string,
+    }|string
+    "createdAt":string
+    "updatedAt":string
 
 }
 
-export interface sateTypes{
+export interface PostStateType{
     data:Data[],
     isLoading:boolean,
     isError:boolean
 }
 
-const initialState:sateTypes={
+const initialState:PostStateType={
     data:[],
     isLoading:false,
     isError:false
@@ -104,6 +118,24 @@ const postSlice= createSlice({
             state.isError=true
 
         })
+
+                // get  post by user id/auth id
+
+                build.addCase(getPostByUserId.fulfilled,(state,action)=>{
+                    state.data=action.payload
+                    state.isLoading=false
+        
+                })
+                build.addCase(getPostByUserId.pending,(state)=>{
+                    state.isLoading=true
+                    state.isError=false
+        
+                })
+                build.addCase(getPostByUserId.rejected,(state)=>{
+                    state.isLoading=false
+                    state.isError=true
+        
+                })
     }
 })
 

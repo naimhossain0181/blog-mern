@@ -1,3 +1,10 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+
+
+/* custom */
+.dashboard-button{
+    @apply flex justify-center gap-2 items-center w-full h-full transition ease-in  delay-100
+}

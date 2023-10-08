@@ -17,6 +17,8 @@ export default {
       'bebas':['Bebas Neue' ,'sans-serif']
     }
   },
-  plugins: [],
+  plugins: [
+    require('tailwind-scrollbar-hide')
+  ],
 }
 

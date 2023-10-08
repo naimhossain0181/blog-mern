@@ -1,9 +1,16 @@
 
 const PostAUthor = () => {
     return (
-        <div>
-            Post Author Details
-        </div>
+        <section>
+            <div>
+                <div className="w-[400px] h-[300px] bg-black">
+                    
+                </div>
+                <div>
+
+                </div>
+            </div>
+        </section>
     );
 };
 
