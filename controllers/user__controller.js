@@ -1,6 +1,7 @@
 import bcrypt from 'bcrypt'
 import jwt from 'jsonwebtoken'
 import UserSchema from '../model/user__model.js'
+import cloudFileUploader from "../utilitis/cloudinarySetup.js";
 
 export const CreateUser = async (req,res)=>{
     const bodyData={
@@ -43,7 +44,7 @@ export const LoginUser = async (req,res)=>{
         const user = await UserSchema.findOne({email:email})
 
         if (user===null ){
-            return res.status(404).json({status:"email or password incorrect"})
+            return res.status(404).json({status:"Email or Password is incorrect"})
         }
 
         const userMatch= await bcrypt.compare(password,user.password)
@@ -54,12 +55,47 @@ export const LoginUser = async (req,res)=>{
         }
 
         else {
-            return res.status(500).json({status:"email or password incorrect"})
+            return res.status(500).json({status:"Email or Password is incorrect"})
         }
     }
     catch (err) {
         return   res.status(500).json({status:"Server Error",message:err})
     }
 
+
+}
+
+
+export const getUserByid =async (req,res)=>{
+    const {id} = req.params
+    try{
+       const user= await UserSchema.findById(id, {password: 0})
+       if (user){
+           return res.status(200).json({status:"User Found",result:user})
+       }
+    }
+    catch (err) {
+        return   res.status(500).json({status:"Server Error",message:err})
+    }
+}
+
+export const changeProfilePicture =async (req,res)=>{
+    const {email} =req.body
+    const userFound=await  UserSchema.findOne({email:email})
+    try{
+        if (!userFound){
+            return res.status(201).json({status:"Your Login Is Not Valided or Expired",result:user})
+        }
+        else {
+            const result = await cloudFileUploader(req.file.path)
+            const user = await  UserSchema.findOneAndUpdate({email:email},{
+                $set: { image:result.url }
+            },{new:true})
+            return res.status(201).json({status:"Profile picture has been Changed",result:user})
+        }
+
+    }catch (err) {
+        return res.status(501).json({status:"pic upload failed",messsage:err})
+    }
 
 }

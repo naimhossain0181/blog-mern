@@ -1,28 +1,36 @@
 import PostSchema from '../model/post_model.js'
 import UserSchema from '../model/user__model.js'
+import cloudFileUploader from "../utilitis/cloudinarySetup.js";
 
 
 export const CreatePost=async (req,res)=>{
     const {title,desc,image,category,author}=req.body
     try {
-        const post = await new PostSchema({
-            title,
-            desc,
-            image,
-            category,
-            author:req.user._id
-        }).save()
+        if (!req.file || req.file.length<0 || req.file===""){
+           return  res.status(501).json("Please Select A Post Image")
+        }
+        else {
+            const result = await cloudFileUploader(req.file.path)
+            const post = await new PostSchema({
+                title,
+                desc,
+                image:result.url,
+                category,
+                author:req.user._id
+            }).save()
 
 
-    //   add post to user posts field
+            //   add post to user posts field
 
-             await UserSchema.findByIdAndUpdate(req.user._id,
-            {$addToSet:{posts:post._id}})
+            await UserSchema.findByIdAndUpdate(req.user._id,
+                {$addToSet:{posts:post._id}})
 
-        return res.status(201).json({status:"Post create success",result:post})
+            return res.status(201).json({status:"Post create success",result:post})
+        }
+
     }
     catch (err) {
-        return res.status(500).json({status:Error,message:err})
+        return res.status(500).json({status:"error",message:err.message})
     }
 
 }
@@ -98,7 +106,7 @@ export const GetPost=async (req,res)=>{
     }
 }
 
-//Get Post By ID
+//Get Post By Post ID
 export const GetPostById=async (req,res)=>{
     const {id}=req.params
 
@@ -119,7 +127,7 @@ export const GetPostById=async (req,res)=>{
         // const post = await PostSchema.findById(id).populate('author','-email -password -role').exec().populate('category')
         if (post.author.block !==true){
             await PostSchema.findByIdAndUpdate(post._id,{views:post.views+1})
-            return res.status(200).json({status:"Success",result:post})
+            return res.status(200).json({status:"Success",result:[post]})
         }
         else {
             return res.status(404).json({status:"Success",result:"Post Not Found"})
@@ -133,28 +141,75 @@ export const GetPostById=async (req,res)=>{
 }
 
 
+//Get Post By user ID
+export const GetPostByUserId=async (req,res)=>{
+    const {userId}=req.params
+
+    try{
+
+        const post = await  PostSchema
+        .find({author:userId})
+        if (post){
+            return res.status(200).json({status:"Success",result:post})
+        }
+        else {
+            return res.status(404).json({status:"Success",result:"Post Not Found"})
+
+        }
+    }
+    catch(err){
+        return res.status(500).json({status:err,message:err.message})
+    }
+
+}
+
+
 //update post
 export const UpdatePost =async (req,res)=>{
     const {id}=req.params
+    const {title,desc,image,category,author}=req.body
+
+
     try {
         const current_post = await PostSchema.findById(id)
         if (current_post.author.toString()===req.user._id.toString()){
-            const data =await PostSchema.findOneAndUpdate(current_post._id,req.body,{new:true})
-           return   res.status(201).json({status:"Post Updated Successfully",result:data})
+
+            if (req.file){
+                const result = await cloudFileUploader(req.file.path)
+                const data =await PostSchema.findOneAndUpdate(current_post._id, {
+                    title:title,
+                    image:result.url,
+                    desc:desc,
+                    category:category
+                },{new:true})
+                return   res.status(201).json({status:"Post Updated Successfully with Image",result:data})
+            }
+
+            if (!req.file){
+                const data =await PostSchema.findOneAndUpdate(current_post._id, {
+                    title:title,
+                    desc:desc,
+                    category:category
+                },{new:true})
+                return   res.status(201).json({status:"Post Updated Successfully without Image",result:data})
+            }
         }
+
         else {
             return res.status(403).json({status:"Failed",message:"You are not Authorized for This action"})
         }
     }
 
     catch (err) {
-        return res.status(500).json({status:Error,message:err})
+        return res.status(500).json({status:Error,message:err.message})
     }
 }
 
 //Delete post
 export const DeletePost =async (req,res)=>{
+
     const {id}=req.params
+
     try {
         const current_post = await PostSchema.findById(id)
         if (current_post.author.toString()===req.user._id.toString()){

@@ -6,7 +6,6 @@ export const authVerification =async (req,res,next)=>{
 
     if (token){
        const user= jwt.verify(token,process.env.Secret)
-        console.log(user.block)
         if (user.role==="user" && user.block===false ||user.role==="admin"){
             req.user=user
             next()
