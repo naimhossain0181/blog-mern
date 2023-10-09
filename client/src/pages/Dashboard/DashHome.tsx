@@ -9,7 +9,7 @@ import { Link, useNavigate } from "react-router-dom";
 const DashHome = () => {
     const Dispatch = useDispatch<AppDispatch>()
     const navigate =useNavigate()
-    const Posts = useSelector((store:RootState)=>store.Posts.data)
+    const Posts = useSelector((store:RootState)=>store.Posts?.data)
     useEffect(() => {
         const token = localStorage.getItem('token')
         if (token) {

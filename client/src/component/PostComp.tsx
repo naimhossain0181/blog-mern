@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom';
 import { RootState } from '../reducer';
 
 const PostComp = ({Posts}:RootState) => {
+    
     return (
         <section>
         <div className='w-full pl-5 pr-5 lg:pl-24 lg:pr-24 mt-12'>
@@ -12,7 +13,7 @@ const PostComp = ({Posts}:RootState) => {
                 <div className=' w-full grid justify-center items-center  gap-5 grid-cols-1 sm:grid-cols-2  md:grid-cols-3 lg:grid-cols-3 '>
 
                 {
-                    Posts?.data?.map((post,index)=>{
+                     Posts?.data.map((post,index)=>{
                         const postDate = new Date(post.createdAt)
                         const day = postDate.getDate()
                         const month = postDate.toLocaleString('default', { month: "short" })

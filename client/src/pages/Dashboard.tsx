@@ -8,6 +8,8 @@ import { AppDispatch, RootState } from '../reducer';
 
 // react icon
 import { BiSolidDashboard } from 'react-icons/bi'
+
+// route
 import DashHome from './Dashboard/DashHome';
 import PostDetails from './PostDetails';
 import Create from './Dashboard/Create';
@@ -32,12 +34,19 @@ const Dashboard = () => {
 
         if (token) {
             const user: decodeJwt = jwtDecode(token)
-            
-            if (user._id) {
-                dispatch(getUserById(user._id))
-            }
-            else {
+            const expireDate= user.exp * 1000
+            if(expireDate<Date.now()){
+                console.log("Date is Big")
+                localStorage.clear()
                 navigate('/')
+            }
+            else{
+                if (user._id) {
+                    dispatch(getUserById(user._id))
+                }
+                else {
+                    navigate('/')
+                }
             }
 
         }
@@ -98,7 +107,7 @@ const Dashboard = () => {
                 </div>
                 <div className=' bg-gray-600 w-[80%] h-[83vh] p-4 overflow-scroll scrollbar-hide'>
                     <Routes>
-                        <Route path='/'  element={<DashHome/>} />
+                        <Route path='/'  element={<DashHome/>}  />
                         <Route path='/:id'  element={<Create></Create>}/>
                         <Route path='/edit'  element={<Edit/>}/>
                         <Route path='/delete'  element={<Delete/>}/>

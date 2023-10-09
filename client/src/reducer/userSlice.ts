@@ -36,7 +36,7 @@ export interface UserStateType {
 
 const initialState: UserStateType = {
   data: null,
-  isLoading: true,
+  isLoading: false,
   isError: false,
 };
 

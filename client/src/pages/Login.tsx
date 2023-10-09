@@ -38,6 +38,7 @@ const Login = ({handdlerLogin}:any) => {
     const navigate=useNavigate()
 
     const [inValue, setInValue] = useState<inputField>(InitialVaule)
+    const [isCLickLogin,setIsclickLogin]=useState(false)
 
     const inputHandler = (e: ChangeEvent<HTMLInputElement>) => {
         const { name, value } = e.target;
@@ -53,9 +54,10 @@ const Login = ({handdlerLogin}:any) => {
 
     const submitHandller = async (e: React.MouseEvent<HTMLButtonElement>) => {
         e.preventDefault()
+        setIsclickLogin(true)
         try {
             const result = await axios.post(`${base_URL}/users/login`, inValue)
-            console.log(result)
+            setIsclickLogin(false)
             if (result.status === 200) {
                 const token = result.data.token
                 const decodeToken:decodeJwt = jwtDecode(token)
@@ -112,7 +114,9 @@ const Login = ({handdlerLogin}:any) => {
                         <input className="p-2 text-sm md:text-base outline-none border-b-2 w-[230px] md:w-[300px]" type="password" id="password" name="password" placeholder="Minimum 6 Charecter password" required value={inValue.password} onChange={inputHandler} />
                     </div>
                     <div className=" flex items-center justify-center w-full">
-                        <button type="submit" className=" w-[100px] h-[40px] bg-purple-600 rounded-md" onClick={submitHandller} >Login</button>
+                        {
+                            isCLickLogin ?  <button type="submit" className=" w-[100px] h-[40px] bg-purple-600 rounded-md text-gray-400" >wait</button> : <button type="submit" className=" w-[100px] h-[40px] bg-purple-600 rounded-md" onClick={submitHandller} >Login</button>
+                        }
                     </div>
                     <span className="flex justify-around items-center w-full"> Or login with </span>
                     <div className="flex justify-around items-center w-full">
