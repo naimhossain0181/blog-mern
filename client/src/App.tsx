@@ -37,7 +37,7 @@ const App = () => {
         <div className="mt-[80px] pb-[80px]">
 
         <Routes >
-          <Route path="/*"  element={<HomePage/>} />
+          <Route path="/"  element={<HomePage/>} />
           <Route path="/posts/:id" element={<PostDetails/>} />
           <Route path="/about/*" element={<About/>} />
           <Route path="/blog/*" element={<Blog/>} />
