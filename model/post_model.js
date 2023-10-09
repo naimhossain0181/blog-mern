@@ -19,6 +19,10 @@ import mongoose from 'mongoose'
         type: String,
         default:"https://www.onlygfx.com/wp-content/uploads/2020/07/blank-post-it-note-1.png"
     },
+     public_id: {
+         type:String,
+         default:""
+     },
 
     author: {
         type: mongoose.Schema.Types.ObjectId,

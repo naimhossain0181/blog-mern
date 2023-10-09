@@ -8,10 +8,12 @@ cloudinary.config({
 })
 
 
-const cloudFileUploader = (file)=>{
+const cloudFileUploader = (file,folder,publicId)=>{
     return (
         cloudinary.uploader.upload(file,{
-            folder:"blog",
+            folder:folder,
+            public_id:publicId,
+            overwrite:true,
             secure:true
         })
     )

@@ -10,11 +10,13 @@ export const CreatePost=async (req,res)=>{
            return  res.status(501).json("Please Select A Post Image")
         }
         else {
-            const result = await cloudFileUploader(req.file.path)
+            const result = await cloudFileUploader(req.file.path,req.user.email,`Post_${Date.now()*1000}`)
+            console.log(result)
             const post = await new PostSchema({
                 title,
                 desc,
-                image:result.url,
+                image:result.secure_url,
+                public_id:result.public_id,
                 category,
                 author:req.user._id
             }).save()
@@ -175,10 +177,11 @@ export const UpdatePost =async (req,res)=>{
         if (current_post.author.toString()===req.user._id.toString()){
 
             if (req.file){
-                const result = await cloudFileUploader(req.file.path)
+                const result = await cloudFileUploader(req.file.path,current_post.email,current_post.public_id)
                 const data =await PostSchema.findOneAndUpdate(current_post._id, {
                     title:title,
-                    image:result.url,
+                    image:result.secure_url,
+                    public_id: result.public_id,
                     desc:desc,
                     category:category
                 },{new:true})

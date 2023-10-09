@@ -2,6 +2,7 @@ import bcrypt from 'bcrypt'
 import jwt from 'jsonwebtoken'
 import UserSchema from '../model/user__model.js'
 import cloudFileUploader from "../utilitis/cloudinarySetup.js";
+import {v2 as cloudinary } from 'cloudinary'
 
 export const CreateUser = async (req,res)=>{
     const bodyData={
@@ -82,19 +83,23 @@ export const getUserByid =async (req,res)=>{
 export const changeProfilePicture =async (req,res)=>{
     const {email} =req.body
     const userFound=await  UserSchema.findOne({email:email})
+    console.log(userFound)
     try{
         if (!userFound){
             return res.status(201).json({status:"Your Login Is Not Valided or Expired",result:user})
         }
         else {
-            const result = await cloudFileUploader(req.file.path)
+            const result = await cloudFileUploader(req.file.path,userFound.email,userFound._id)
             const user = await  UserSchema.findOneAndUpdate({email:email},{
-                $set: { image:result.url }
+                $set: { image:result.secure_url,
+                        public_id:result.public_id,
+                    }
             },{new:true})
             return res.status(201).json({status:"Profile picture has been Changed",result:user})
         }
 
     }catch (err) {
+        console.log(err)
         return res.status(501).json({status:"pic upload failed",messsage:err})
     }
 

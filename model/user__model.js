@@ -19,6 +19,10 @@ import mongoose from 'mongoose'
         type:String,
         default:"https://assets.stickpng.com/images/585e4bcdcb11b227491c3396.png"
     },
+     public_id: {
+         type:String,
+         default:""
+     },
     posts:[
         {
         type:mongoose.Schema.Types.ObjectId,
