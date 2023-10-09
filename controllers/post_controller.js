@@ -68,14 +68,14 @@ export const GetPost=async (req,res)=>{
             $unwind:"$category",
 
         },
-        {
-            $lookup:{
-                from:'posts',   //origin of author
-                localField:"author.posts", //which field we want to populate
-                foreignField:"_id", //Type of filed
-                as:"author.posts"
-            }
-        },
+        // {
+        //     $lookup:{
+        //         from:'posts',   //origin of author
+        //         localField:"author.posts", //which field we want to populate
+        //         foreignField:"_id", //Type of filed
+        //         as:"author.posts"
+        //     }
+        // },
         {
             $match:{
                 "author.block":false
@@ -117,11 +117,11 @@ export const GetPostById=async (req,res)=>{
   .populate({
     path: 'author',
     model: UserSchema, // Replace with the actual model name if it's different
-    select:'-password -email -role ',
-    populate: {
-      path: 'posts',
-      model: PostSchema, // Replace with the actual model name if it's different
-    },
+    select:'-password -email -role -posts ',
+    // populate: {
+    //   path: 'posts',
+    //   model: PostSchema, // Replace with the actual model name if it's different
+    // },
   }).populate({path:'category'})
   .exec();
 
@@ -150,7 +150,12 @@ export const GetPostByUserId=async (req,res)=>{
     try{
 
         const post = await  PostSchema
-        .find({author:userId})
+        .find({author:userId}).populate({
+                path:"author",
+                select:"-password -email -role -posts"
+            }).populate({
+                path:"category"
+            })
         if (post){
             return res.status(200).json({status:"Success",result:post})
         }
@@ -160,6 +165,7 @@ export const GetPostByUserId=async (req,res)=>{
         }
     }
     catch(err){
+        console.log(err)
         return res.status(500).json({status:err,message:err.message})
     }
 

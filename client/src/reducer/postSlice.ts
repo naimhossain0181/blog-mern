@@ -48,7 +48,7 @@ export type Data={
         "_id":string
         "name":string
         "image":string
-    } | string
+    }
     "views": number
     "likes": any[]
     "comments": any[]
