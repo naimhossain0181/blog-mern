@@ -33,8 +33,8 @@ const PostComp = ({Posts}:RootState) => {
                                 <h1 className=' font-serif font-extrabold text-lg lg:text-2xl text-gray-900 '>{post.title}</h1>
                                 <div className=' hidden md:flex justify-between items-center'>
                                     <div className='   flex flex-row justify-center items-center gap-2'>
-                                        <img className=' w-8 h-8 rounded-full object-cover' src={typeof post.author==="string" ? post.author : post.author.image} alt="" />
-                                        <span className=' font-bebas font-bold'>{typeof post.author==="string"?post.author : post.author.name}</span>
+                                        <img className=' w-8 h-8 rounded-full object-cover' src={typeof post.author !=="string" ? post.author.image : post.author} alt="" />
+                                        <span className=' font-bebas font-bold'>{typeof post.author==="string"? post.author : post.author.name}</span>
                                     </div>
                                     <span className='  flex font-bebas text-gray-700'>views {post.views} </span>
                                 </div>
