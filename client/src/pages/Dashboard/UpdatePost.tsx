@@ -3,7 +3,7 @@ import { useEffect, useState, useRef } from "react";
 import { base_URL } from "../../utilitis/baseUrl";
 import { toast, ToastContainer } from 'react-toastify';
 import { FaCloudUploadAlt } from 'react-icons/fa'
-import { useLocation, useParams } from "react-router-dom";
+import { useLocation, useNavigate, useParams } from "react-router-dom";
 
 export type category = {
     _id: string
@@ -17,6 +17,7 @@ type initialDataType={
     category:string |null
 }
 const UpdatePost = () => {
+    const navigate =useNavigate()
     const { id } = useParams()
     const location = useLocation()
     const searchParams = new URLSearchParams(location.search)
@@ -29,7 +30,7 @@ const UpdatePost = () => {
 
     const [inputValue,setInputValue]=useState<initialDataType >(InitialVaule)
     const [categories, setCategories] = useState<category[]>([])
-    // const [loading, setLoading] = useState(false)
+    const [isLoading, setIsLoading] = useState(false)
     const [percentage, setPercentage] = useState<number>(0)
     const [prevImage, setPrevImage] = useState<any>(searchParams.get('image'))
 
@@ -61,6 +62,7 @@ const UpdatePost = () => {
 
     const submit = (e: any) => {
         e.preventDefault()
+        setIsLoading(true)
         const title: string | null = inputValue.title || null;
         const file: File | null = e.target.image.files[0] || null;
         const category: string | null = inputValue.category || null;
@@ -86,13 +88,18 @@ const UpdatePost = () => {
             }
         })
             .then(() => {
-                toast("Post Create SuccessFully")
                 e.target.reset()
+                setIsLoading(false)
+                toast('Update Successfully')
                 setPercentage(0)
                 setPrevImage(null)
+                navigate(`/dashboard/post/${id}`)
+                
             })
             .catch((e) => {
                 console.log(e.response)
+                setIsLoading(false)
+                toast(e.response.data)
             })
     }
 
@@ -104,12 +111,12 @@ const UpdatePost = () => {
     }, [])
     return (
         <div className=" w-full h-full pt-5 pb-5">
+                <ToastContainer />
             <div className=" justify-center flex flex-col items-center">
                 <h1 className=" font-bebas text-4xl text-yellow-100">Update Your Post</h1>
-                <ToastContainer />
                 <form onSubmit={submit}  className=" w-[90%]  h-full">
                     <div className=" flex h-[100%] w-full justify-around items-start flex-col gap-2">
-                        <input className=" w-[500px] h-[60px] outline-none pl-2 rounded-md text-lg" type="text" name="title" id="" placeholder="Title" value={inputValue.title ||""} onChange={handleValueOnchange} />
+                        <input className=" w-[280px] md:w-[500px] h-[60px] outline-none pl-2 rounded-md text-lg" type="text" name="title" id="" placeholder="Title" value={inputValue.title ||""} onChange={handleValueOnchange} />
                         <textarea className=" h-72 w-full shadow-2xl  outline-none rounded-md " name="desc" id="" value={inputValue.desc || ""} onChange={handleValueOnchange}  >
                         </textarea>
                         <div className=" flex w-full h-[80px] justify-around items-center flex-wrap gap-4">
@@ -132,8 +139,8 @@ const UpdatePost = () => {
                                 </select>
                             </div>
                             <div className=" w-[20%] flex justify-center items-center">
-
-                                <button className=" bg-blue-400 w-24 h-8" type="submit">Update </button>
+                                    {!isLoading?  <button className=" bg-blue-400 w-24 h-8" type="submit">Update </button>: <button disabled className=" bg-blue-400 w-24 h-8" type="submit">Updating... </button> }
+                                
                             </div>
                         </div>
 

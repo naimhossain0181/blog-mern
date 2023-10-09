@@ -57,6 +57,11 @@ const Signup = () => {
         }
     })
 
+    useEffect(() => {
+        window.scrollTo({ top: 0, behavior: 'smooth' })
+      }, [location.pathname]);
+
+
 
 
     return (

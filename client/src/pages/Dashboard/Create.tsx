@@ -16,7 +16,7 @@ const Create = () => {
 
 
     const [categories, setCategories] = useState<category[]>([])
-    // const [loading, setLoading] = useState(false)
+    const [isLoading,setIsloading]=useState(false)
     const [percentage, setPercentage] = useState<number>(0)
     const [prevImage, setPrevImage] = useState<any>(null)
 
@@ -39,6 +39,7 @@ const Create = () => {
 
     const submit = (e: any) => {
         e.preventDefault()
+        setIsloading(true)
         let title = e.target.title.value
         let file = e.target.image.files[0]
         let category = e.target.category.value
@@ -63,10 +64,13 @@ const Create = () => {
             .then(() => {
                 toast("Post Create SuccessFully")
                 e.target.reset()
+                setIsloading(false)
                 setPercentage(0)
                 setPrevImage(null)
             })
             .catch((e) => {
+                toast(e.response.data)
+                setIsloading(false)
                 console.log(e.response)
             })
     }
@@ -77,12 +81,13 @@ const Create = () => {
             .catch((e) => console.log(e))
     }, [])
     return (
+
         <div className=" w-full h-full pt-5 pb-5">
             <div className=" justify-center flex flex-col items-center">
                 <h1 className=" font-bebas text-4xl text-yellow-100">Create Your New Post</h1>
                 <ToastContainer />
                 <form onSubmit={submit} className=" w-[90%]  h-full">
-                    <PostCreateForm  prevImage={prevImage} FileInput={FileInput} categories={categories} handleImageChange={handleImageChange} />
+                    <PostCreateForm  prevImage={prevImage} FileInput={FileInput} categories={categories} handleImageChange={handleImageChange} isLoading={isLoading} setIsloading={setIsloading} />
                 </form>
             </div>
 

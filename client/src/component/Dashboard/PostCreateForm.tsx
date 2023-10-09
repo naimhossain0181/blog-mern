@@ -5,20 +5,25 @@ interface PostCreateFormProps {
     prevImage: string | null;
     FileInput: React.RefObject<HTMLInputElement>;
     categories: category[];
+    isLoading:boolean
+    setIsloading: React.Dispatch<React.SetStateAction<boolean>>
+    
     handleImageChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   }
 
   
 const PostCreateForm = ( props:PostCreateFormProps) => {
-    const {prevImage,FileInput,handleImageChange,categories}=props
+    const {prevImage,FileInput,handleImageChange,categories,isLoading}=props
+
+
     return (
         <div className=" flex h-[100%] w-full justify-around items-start flex-col gap-2">
-        <input className=" w-[500px] h-[60px] outline-none pl-2 rounded-md text-lg" type="text" name="title" id="" placeholder="Title" />
+        <input className=" w-[300px] md:w-[500px] h-[60px] outline-none pl-2 rounded-md text-lg" type="text" name="title" id="" placeholder="Title" />
         <textarea className=" h-72 w-full shadow-2xl  outline-none rounded-md " name="desc" id="" >
 
         </textarea>
         <div className=" flex w-full h-[80px] justify-around items-center flex-wrap gap-4">
-            <div className=" w-[30%] h-full flex justify-between items-center">
+            <div className=" w-[20%] md:w-[30%] h-full flex justify-between items-center">
                 <input className=" bg-yellow-200 hidden" type="file" name="image" id="" placeholder="image" ref={FileInput} onChange={handleImageChange} />
                 <div className=" text-4xl" onClick={() => FileInput.current?.click()}><FaCloudUploadAlt /></div>
                 {prevImage ? <img className=" w-[100px] h-[80px]" src={prevImage} alt="none" /> : ""}
@@ -38,7 +43,11 @@ const PostCreateForm = ( props:PostCreateFormProps) => {
             </div>
             <div className=" w-[20%] flex justify-center items-center">
 
-            <button className=" bg-blue-400 w-24 h-8" type="submit">Create </button>
+                    {
+                        !isLoading?  <button className=" bg-blue-400 w-24 h-8" type="submit">Create </button>:  <button disabled className=" bg-blue-400 w-24 h-8" type="submit">Creating... </button>
+                    }
+          
+            
             </div>
         </div>
 

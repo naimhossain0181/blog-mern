@@ -77,6 +77,8 @@ const Login = ({handdlerLogin}:any) => {
             }
         }
         catch (err: any) {
+            setIsclickLogin(false)
+
             if (err.response) {
                 toast(err.response.data.status)
             }
@@ -94,6 +96,11 @@ const Login = ({handdlerLogin}:any) => {
           navigate("/dashboard");
         }
     })
+
+    useEffect(() => {
+        window.scrollTo({ top: 0, behavior: 'smooth' })
+      }, [location.pathname]);
+
 
 
     return (

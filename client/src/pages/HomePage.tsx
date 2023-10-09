@@ -22,13 +22,14 @@ const HomePage = () => {
     useEffect(() => {
         window.scrollTo({ top: 0, behavior: 'smooth' })
       }, [location.pathname]);
-
+   
 
     if (Posts.isLoading) {
         return (
             <Loading/>
         );
     }
+
     return (
         <div >
             <Slide Posts={Posts}/>
