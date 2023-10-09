@@ -11,8 +11,7 @@ cloudinary.config({
 const cloudFileUploader = (file)=>{
     return (
         cloudinary.uploader.upload(file,{
-            folder:"blog",
-            secure:true
+            folder:"blog"
         })
     )
 }
