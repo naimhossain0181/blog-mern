@@ -11,33 +11,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="f5f12ada-061d-42e6-a686-b1056bd0d2d3" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/utilitis/cloudinarySetup.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/client/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/client/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/App.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/App.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/component/NavBar.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/component/NavBar.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/component/PostComp.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/component/PostComp.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/component/RecentArticle.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/component/RecentArticle.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/component/Slide.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/component/Slide.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/index.css" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/index.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/main.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/main.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/pages/HomePage.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/pages/HomePage.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/pages/Login.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/pages/Login.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/pages/PostAUthor.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/pages/PostAUthor.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/pages/PostDetails.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/pages/PostDetails.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/pages/Signup.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/pages/Signup.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/reducer/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/reducer/index.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/reducer/postSlice.ts" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/reducer/postSlice.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/tailwind.config.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/tailwind.config.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/controllers/post_controller.js" beforeDir="false" afterPath="$PROJECT_DIR$/controllers/post_controller.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/controllers/user__controller.js" beforeDir="false" afterPath="$PROJECT_DIR$/controllers/user__controller.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/middlewares/verifyAuth.js" beforeDir="false" afterPath="$PROJECT_DIR$/middlewares/verifyAuth.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/routes/auth.js" beforeDir="false" afterPath="$PROJECT_DIR$/routes/auth.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/routes/post.js" beforeDir="false" afterPath="$PROJECT_DIR$/routes/post.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -102,7 +77,8 @@
       <workItem from="1696245695366" duration="2298000" />
       <workItem from="1696516841105" duration="2644000" />
       <workItem from="1696609180931" duration="118000" />
-      <workItem from="1696681557122" duration="14713000" />
+      <workItem from="1696681557122" duration="15953000" />
+      <workItem from="1696845641732" duration="72000" />
     </task>
     <servers />
   </component>

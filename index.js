@@ -50,13 +50,13 @@ app.post("/upload",async (req,res)=>{
 
 //db connection
 mongoose.connect(process.env.DB_URI).then(()=>console.log(`app connected with database`)).catch((error)=>console.log(error.message))
-// //font-end backend run concorrently
-// const __filename = fileURLToPath(import.meta.url);
-// const __dirname = path.dirname(__filename);
-// app.use(express.static(path.join(__dirname,"./client/dist")))
-// app.get('*',(req,res)=>{
-//     res.sendFile(path.resolve(__dirname,'./','client','dist','index.html'))
-// })
+//font-end backend run concorrently
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+app.use(express.static(path.join(__dirname,"./client/dist")))
+app.get('*',(req,res)=>{
+    res.sendFile(path.resolve(__dirname,'./','client','dist','index.html'))
+})
 
 app.use("/users",userRouter)
 app.use("/posts",postRouter)
