@@ -4,7 +4,7 @@ import {  getAllPost } from "../reducer/postSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "../reducer";
 import RecentArticle from "../component/RecentArticle";
-import PostComp from "../component/PostComp";
+import AllPostComp from "../component/AllPostComp";
 import Loading from "../component/Loading";
 import { useLocation } from "react-router-dom";
 
@@ -34,7 +34,7 @@ const HomePage = () => {
         <div >
             <Slide Posts={Posts}/>
             <RecentArticle Posts={Posts} />
-            <PostComp Posts={Posts} />
+            <AllPostComp Posts={Posts} />
         </div>
     );
 };

@@ -12,11 +12,17 @@
   <component name="ChangeListManager">
     <list default="true" id="f5f12ada-061d-42e6-a686-b1056bd0d2d3" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/dist/assets/index-0a00c7c5.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/dist/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/client/dist/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/component/PostComp.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/component/PostComp.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/App.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/App.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/component/NavBar.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/component/PostComp.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/pages/About.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/pages/About.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/pages/Contact.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/pages/Contact.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/pages/Dashboard/Delete.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/pages/Dashboard/Delete.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/pages/HomePage.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/pages/HomePage.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/client/src/reducer/postSlice.ts" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/reducer/postSlice.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/utilitis/baseUrl.ts" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/utilitis/baseUrl.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/controllers/post_controller.js" beforeDir="false" afterPath="$PROJECT_DIR$/controllers/post_controller.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/routes/post.js" beforeDir="false" afterPath="$PROJECT_DIR$/routes/post.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -85,6 +91,7 @@
       <workItem from="1696845641732" duration="3005000" />
       <workItem from="1696873966048" duration="7592000" />
       <workItem from="1696889041743" duration="1385000" />
+      <workItem from="1697036220079" duration="1777000" />
     </task>
     <servers />
   </component>

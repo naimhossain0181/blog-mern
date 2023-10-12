@@ -11,7 +11,7 @@ import Swal from "sweetalert2";
 const Delete = () => {
     const Dispatch = useDispatch<AppDispatch>()
     const navigate = useNavigate()
-    const Posts = useSelector((store: RootState) => store.Posts.data)
+    const Posts = useSelector((store: RootState) => store?.Posts?.data)
 
 
     const handleOnclickDelete = (id:string)=>{
@@ -62,12 +62,16 @@ const Delete = () => {
         else {
             navigate('/')
         }
-    }, [Posts])
+    }, [])
+
+
     return (
         <section>
             <h1>Welcome To Your Controller</h1>
             <div className=" flex h-full w-full gap-4 justify-around flex-wrap">
-                {Posts?.map((item, index) => {
+                {
+                
+                 Posts?.map((item, index) => {
                     return (
                         <div key={index}>
                             <div  className=" flex flex-col gap-3 h-[200px] w-[220px] bg-white rounded-t-lg">

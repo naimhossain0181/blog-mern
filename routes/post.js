@@ -1,6 +1,6 @@
 import  express from 'express'
 import {authVerification,isAdminVerification} from "../middlewares/verifyAuth.js";
-import {CreatePost,UpdatePost,DeletePost,GetPost,GetPostById,GetPostByUserId} from "../controllers/post_controller.js";
+import {CreatePost,UpdatePost,DeletePost,GetPost,GetPostById,GetPostByUserId,GetPostByCategory} from "../controllers/post_controller.js";
 
 const router= express.Router()
 
@@ -10,6 +10,7 @@ const router= express.Router()
 router.post("/createPost",authVerification,CreatePost)
 router.get("/",GetPost)
 router.get("/:id",GetPostById)
+router.get("/category/:categoryId",GetPostByCategory)
 router.get("/my/:userId",authVerification,GetPostByUserId)
 router.put("/:id",authVerification,UpdatePost)
 router.delete("/:id",authVerification,DeletePost)

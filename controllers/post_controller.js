@@ -172,6 +172,35 @@ export const GetPostByUserId=async (req,res)=>{
 }
 
 
+//Get Post By Category Name
+export const GetPostByCategory=async (req,res)=>{
+    const {categoryId}=req.params
+
+    try{
+
+        const post = await  PostSchema
+            .find({category:categoryId}).populate({
+                path:"author",
+                select:"-password -email -role -posts"
+            }).populate({
+                path:"category"
+            })
+        if (post){
+            return res.status(200).json({status:"Success",result:post})
+        }
+        else {
+            return res.status(404).json({status:"Success",result:"Post Not Found"})
+
+        }
+    }
+    catch(err){
+        console.log(err)
+        return res.status(500).json({status:err,message:err.message})
+    }
+
+}
+
+
 //update post
 export const UpdatePost =async (req,res)=>{
     const {id}=req.params
