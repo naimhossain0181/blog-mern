@@ -81,7 +81,7 @@ export const getUserByid =async (req,res)=>{
 }
 
 export const changeProfilePicture =async (req,res)=>{
-    const {email} =req.body
+    const {email} =req.user
     const userFound=await  UserSchema.findOne({email:email})
     console.log(userFound)
     try{
@@ -95,12 +95,12 @@ export const changeProfilePicture =async (req,res)=>{
                         public_id:result.public_id,
                     }
             },{new:true})
-            return res.status(201).json({status:"Profile picture has been Changed",result:user})
+            return res.status(201).json({status:"Profile picture has been Changed"})
         }
 
     }catch (err) {
         console.log(err)
-        return res.status(501).json({status:"pic upload failed",messsage:err})
+        return res.status(501).json({status:"pic upload failed",messsage:err.message})
     }
 
 }
