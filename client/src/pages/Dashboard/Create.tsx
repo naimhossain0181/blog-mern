@@ -19,6 +19,7 @@ const Create = () => {
     const [isLoading,setIsloading]=useState(false)
     const [percentage, setPercentage] = useState<number>(0)
     const [prevImage, setPrevImage] = useState<any>(null)
+    const [content, setContent] = useState<any>(null)
 
     const FileInput = useRef<any>(null)
 
@@ -43,13 +44,13 @@ const Create = () => {
         let title = e.target.title.value
         let file = e.target.image.files[0]
         let category = e.target.category.value
-        let desc = e.target.desc.value
+        // let desc = e.target.desc.value
 
         const formData = new FormData()
         formData.append("title", title)
         formData.append("image", file)
         formData.append("category", category)
-        formData.append("desc", desc)
+        formData.append("desc", content)
         axios.post(`${base_URL}/posts/createpost`, formData, {
             headers: {
                 token: localStorage.getItem("token"),
@@ -64,6 +65,7 @@ const Create = () => {
             .then(() => {
                 toast("Post Create SuccessFully")
                 e.target.reset()
+                setContent("")
                 setIsloading(false)
                 setPercentage(0)
                 setPrevImage(null)
@@ -87,7 +89,7 @@ const Create = () => {
                 <h1 className=" font-bebas text-4xl text-yellow-100">Create Your New Post</h1>
                 <ToastContainer />
                 <form onSubmit={submit} className=" w-[90%]  h-full">
-                    <PostCreateForm  prevImage={prevImage} FileInput={FileInput} categories={categories} handleImageChange={handleImageChange} isLoading={isLoading} setIsloading={setIsloading} />
+                    <PostCreateForm  prevImage={prevImage} FileInput={FileInput} categories={categories} handleImageChange={handleImageChange} isLoading={isLoading} setIsloading={setIsloading} content={content} setContent={setContent} />
                 </form>
             </div>
 

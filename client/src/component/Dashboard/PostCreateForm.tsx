@@ -1,7 +1,28 @@
 import { category } from "../../pages/Dashboard/Create";
 import { FaCloudUploadAlt } from 'react-icons/fa'
+import React from 'react';
+import ReactQuill from 'react-quill';
+import 'react-quill/dist/quill.snow.css';
+
+
+const TOOLBAR_OPTIONS = [
+    [{ header: [1, 2, 3, false] }],
+    ["bold", "italic", "underline", "strike", "blockquote", "link",'code-block'],
+    [{
+        'color': ['#F00', '#0F0', '#00F', '#000', '#FFF', 'color-picker'],
+      },
+      {
+        'background':['#F00', '#0F0', '#00F', '#000', '#FFF', 'color-picker']
+      }
+    ],
+    [{ list: "ordered" }, { list: "bullet" }],
+    [{ indent: "-1" }, { indent: "+1" }],
+    ["clean"]
+  ];
 
 interface PostCreateFormProps {
+    content:ReactQuill.Value,
+    setContent:React.Dispatch<React.SetStateAction<ReactQuill.Value>>
     prevImage: string | null;
     FileInput: React.RefObject<HTMLInputElement>;
     categories: category[];
@@ -13,15 +34,15 @@ interface PostCreateFormProps {
 
   
 const PostCreateForm = ( props:PostCreateFormProps) => {
-    const {prevImage,FileInput,handleImageChange,categories,isLoading}=props
+    const {prevImage,FileInput,handleImageChange,categories,isLoading,content,setContent}=props
 
 
     return (
         <div className=" flex h-[100%] w-full justify-around items-start flex-col gap-2">
         <input className=" w-[300px] md:w-[500px] h-[60px] outline-none pl-2 rounded-md text-lg" type="text" name="title" id="" placeholder="Title" />
-        <textarea className=" h-72 w-full shadow-2xl  outline-none rounded-md " name="desc" id="" >
-
-        </textarea>
+        <ReactQuill className="w-full h-96 pb-16 bg-white" modules={{
+            toolbar:TOOLBAR_OPTIONS
+        }}  placeholder="compose your post" theme="snow" value={content} onChange={setContent} />
         <div className=" flex w-full h-[80px] justify-around items-center flex-wrap gap-4">
             <div className=" w-[20%] md:w-[30%] h-full flex justify-between items-center">
                 <input className=" bg-yellow-200 hidden" type="file" name="image" id="" placeholder="image" ref={FileInput} onChange={handleImageChange} />

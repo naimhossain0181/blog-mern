@@ -31,7 +31,7 @@ const Edit = () => {
                 {Posts?.map((item, index) => {
                     return (
                         <div key={index}>
-                            <Link to={`/dashboard/post/update/${item._id}?title=${item.title}&desc=${item.desc}&category=${item.category}&image=${item.image}`} className=" flex flex-col gap-3 h-[200px] w-[220px] bg-white rounded-t-lg">
+                            <Link to={`/dashboard/post/update/${item._id}`} className=" flex flex-col gap-3 h-[200px] w-[220px] bg-white rounded-t-lg">
                                 <img className=" h-[120px] w-full object-cover shadow-2xl " src={item.image} alt="" />
                                 <h1 >{item.title}</h1>
                             </Link>

@@ -38,8 +38,8 @@ const Delete = () => {
                             text: "Your file has been deleted",
                             icon: 'success',
                         }
-                        
-                      )
+                        )
+                        navigate(0)
                 })
           
             }

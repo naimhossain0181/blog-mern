@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { RootState } from "../reducer";
+import  parser  from 'html-react-parser';
 // icon
 import { BsArrowLeftCircleFill, BsArrowRightCircleFill } from 'react-icons/bs'
 import { Autoplay, Pagination, Navigation, Controller, FreeMode, Thumbs } from "swiper/modules";
@@ -85,7 +86,7 @@ const Slide = ({ Posts }: RootState) => {
                                         </div>
                                         <div className="w-[100%] gap-2  flex flex-col md:gap-10" >
                                             <h1 className=" text-3xl md:text-5xl">{post.title}</h1>
-                                            <p className="text-gray-600 "> {post.desc.slice(0, 200)}  <span className=" text-blue-400">..Raed more...</span></p>
+                                            <p  className="text-gray-600 "> {parser(post.desc.slice(0, 200))}  <span className=" text-blue-400">..Raed more...</span></p>
                                         </div>
                                         <div className=" flex justify-between w-full items-center pr-4">
                                             <div className=" flex items-center w-[200px]" >

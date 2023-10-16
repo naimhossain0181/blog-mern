@@ -72,7 +72,6 @@ export type Data = {
         name: string;
         icon: string;
       }
-    | string;
   createdAt: string;
   updatedAt: string;
 };
